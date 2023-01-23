@@ -16,6 +16,7 @@
   width: 100%;
   z-index: 2;
   font-family: var(--font-mono);
+  flex-wrap: wrap;
 }
 
 .description a {
@@ -208,7 +209,7 @@
   }
 
   .description a {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
   .description p {
