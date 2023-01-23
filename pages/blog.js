@@ -15,7 +15,7 @@ export async function getServerSideProps(ctx) {
     if(!session) {
         return {
             redirect: {
-                destination: `/api/auth/signin?callbackUrl=http://localhost:3000/blog`,
+                destination: `/api/auth/signin?callbackUrl=/blog`,
                 permanent: false,
             },
         }
