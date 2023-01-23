@@ -7,7 +7,7 @@ function Navbar() {
     return (
         <nav className='header'>
             <h1 className='logo'>
-                <a href='/'>NextAuth</a>
+                <Link href='/'>NextAuth</Link>
             </h1>
             <ul className={`main-nav ${status === "loading" ? 'loading' : 'loaded'}`}>
                 <li>
