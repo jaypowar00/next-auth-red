@@ -2,10 +2,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
+import { signIn, useSession } from 'next-auth/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const { data: session, status } = useSession()
+  console.log({ session, status })
   return (
     <>
       <Head>
@@ -26,7 +29,6 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{' '}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
@@ -38,7 +40,24 @@ export default function Home() {
             </a>
           </div>
         </div>
-
+        <div className={styles.description + styles.center}>
+          <h1>{status === "authenticated" && session !== null && (session.user.name ? session.user.name : session.user.email) + "!"} Welcome to Next.js</h1>
+          {
+            session ?
+              <>
+                {
+                  (session.user.emailVerified) ?
+                    <div>
+                      <b>✅ Email Verified! &#10098;{session.user.email}&#10099; </b>
+                    </div>
+                    : <div>
+                      <b>❌ Email Not Verified! &#10098;{session.user.email}&#10099; </b>
+                      <button style={{ backgroundColor: 'green', padding: '6px', border: 'none', borderRadius: '5px' }} onClick={async () => signIn('email', { email: session.user.email })}>Verify Email</button>
+                    </div>
+                }
+              </>:<></>
+          }
+        </div>
         <div className={styles.center}>
           <Image
             className={styles.logo}
