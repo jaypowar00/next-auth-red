@@ -47,6 +47,7 @@ export default NextAuth({
             from: process.env.EMAIL_FROM
         }),
     ],
+    site: process.env.NEXTAUTH_URL,
     adapter: MongoDBAdapter(clientPromise, {
         databaseName: "nextAuthDb"
     }),
@@ -54,7 +55,7 @@ export default NextAuth({
     secret: process.env.NEXTAUTH_SECRET,
     jwt: {
         encryption: true,
-        secret: process.env.NEXTAUTH_URL,
+        secret: process.env.NEXTAUTH_SECRET,
         async encode({ secret, token }) {
             console.log('\n\n#################\njwt encode callback:')
             console.log('[+] Payload:')
